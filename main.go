@@ -47,7 +47,7 @@ func authenticate(db *sql.DB, username, password string) bool {
 		return false
 	}
 
-	// Compare provided password to retrieved password hash
+	// Compare password to retrieved password hash
 	err = bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }
@@ -106,9 +106,9 @@ func getJobListFromEndpoint(page, description, location, fullTime string) ([]job
 	return jobList, nil
 }
 
-// Function to retrieve detail of jobs from external endpoint
+// Function to retrieve detail of job from external endpoint
 func getJobDetailFromEndpoint(id string) (jobData, error) {
-	// Make HTTP request to external endpoint to retrieve job list
+	// Make HTTP request to external endpoint to retrieve job detail
 	var jobDetail jobData
 	resp, err := http.Get("http://dev3.dansmultipro.co.id/api/recruitment/positions/" + id)
 	if err != nil {
@@ -178,7 +178,7 @@ func jobDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	id := r.URL.Query().Get("id")
 
-	// Retrieve job list from external endpoint
+	// Retrieve job detail from external endpoint
 	jobDetail, err := getJobDetailFromEndpoint(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
