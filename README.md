@@ -18,7 +18,7 @@
 
 ## Test Login Credential
 ```
-Username: kelvins19
+Username: kelvin
 Password: 123456
 ```
 
